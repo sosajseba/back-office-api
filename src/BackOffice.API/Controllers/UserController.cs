@@ -1,8 +1,11 @@
 using BackOffice.Application.Users.Create;
+using BackOffice.Application.Users.Delete;
 using BackOffice.Application.Users.GetAll;
 using BackOffice.Application.Users.GetById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.JsonPatch;
+using BackOffice.Application.Users.Update;
 
 namespace BackOffice.API.Controllers;
 
@@ -32,6 +35,29 @@ public class UserController(ISender mediator) : ControllerBase
     public async Task<IActionResult> GetById(Guid id)
     {
         var userResult = await _mediator.Send(new GetUserByIdQuery(id));
+
+        return Ok(userResult);
+    }
+
+    [HttpPatch("{id}")]
+    public async Task<IActionResult> Patch(Guid id, [FromBody] JsonPatchDocument<UpdateUserCommand> patchDoc)
+    {
+        if (patchDoc != null)
+        {
+            //var result = await _mediator.Send(command);
+
+            return Ok(patchDoc);
+        }
+        else
+        {
+            return BadRequest("patchDoc is null");
+        }
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        var userResult = await _mediator.Send(new DeleteUserCommand(id));
 
         return Ok(userResult);
     }
