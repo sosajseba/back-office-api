@@ -11,6 +11,8 @@ builder.Services.AddPresentation(builder.Configuration)
                 .AddInfrastructure(builder.Configuration)
                 .AddApplication();
 
+builder.Services.AddControllers().AddNewtonsoftJson();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

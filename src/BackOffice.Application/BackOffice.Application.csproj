@@ -15,7 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Users\Common\" />
+    <Folder Include="Users\Create\" />
     <Folder Include="Users\Delete\" />
+    <Folder Include="Users\GetAll\" />
+    <Folder Include="Users\GetById\" />
     <Folder Include="Users\Update\" />
   </ItemGroup>
 

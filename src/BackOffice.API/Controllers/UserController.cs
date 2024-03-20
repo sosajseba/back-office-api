@@ -2,10 +2,10 @@ using BackOffice.Application.Users.Create;
 using BackOffice.Application.Users.Delete;
 using BackOffice.Application.Users.GetAll;
 using BackOffice.Application.Users.GetById;
+using BackOffice.Application.Users.Update;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.JsonPatch;
-using BackOffice.Application.Users.Update;
 
 namespace BackOffice.API.Controllers;
 
@@ -44,9 +44,11 @@ public class UserController(ISender mediator) : ControllerBase
     {
         if (patchDoc != null)
         {
-            //var result = await _mediator.Send(command);
+            var patchUserCommand = new PatchUserCommand(id, patchDoc);
+            
+            var result = await _mediator.Send(patchUserCommand);
 
-            return Ok(patchDoc);
+            return result ? NoContent() : NotFound();
         }
         else
         {
