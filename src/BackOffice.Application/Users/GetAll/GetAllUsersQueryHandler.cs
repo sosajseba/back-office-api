@@ -9,13 +9,13 @@ internal sealed class GetAllUsersQueryHandler(IUserRepository userRepository) : 
 
     public async Task<IReadOnlyList<UserResponse>> Handle(GetAllUsersQuery query, CancellationToken cancellationToken)
     {
-        IReadOnlyList<User> customers = await _userRepository.GetAll();
+        IReadOnlyList<User> users = await _userRepository.GetAll();
 
-        return customers.Select(customer => new UserResponse(
-                customer.Id.Value,
-                customer.FullName,
-                customer.Email,
-                    customer.Active
+        return users.Select(user => new UserResponse(
+                user.Id.Value,
+                user.FullName,
+                user.Email,
+                    user.Active
             )).ToList();
     }
 }

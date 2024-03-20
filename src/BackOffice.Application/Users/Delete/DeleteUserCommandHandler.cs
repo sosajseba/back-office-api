@@ -11,7 +11,7 @@ internal sealed class DeleteUserCommandHandler(IUserRepository userRepository) :
     {
         var userId = new UserId(command.Id);
 
-        if (await _userRepository.GetByIdAsync(new UserId(command.Id)) is not User user)
+        if (await _userRepository.GetByIdAsync(new UserId(command.Id)) is null)
         {
             return false;
         }

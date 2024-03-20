@@ -1,4 +1,5 @@
 ﻿using BackOffice.Application.Data;
+using BackOffice.Domain.Realms;
 using BackOffice.Domain.Users;
 using MongoDB.Driver;
 
@@ -13,6 +14,15 @@ public class ApplicationMongoDbContext(IMongoClient mongoClient) : IApplicationM
         get
         {
             return _mongoClient.GetDatabase("back-office-db").GetCollection<User>("Users");
+        }
+        set { }
+    }
+
+    public IMongoCollection<Realm> Realms
+    {
+        get
+        {
+            return _mongoClient.GetDatabase("back-office-db").GetCollection<Realm>("Realms");
         }
         set { }
     }

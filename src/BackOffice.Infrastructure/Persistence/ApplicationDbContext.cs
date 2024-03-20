@@ -1,5 +1,6 @@
 ﻿using BackOffice.Application.Data;
 using BackOffice.Domain.Primitives;
+using BackOffice.Domain.Realms;
 using BackOffice.Domain.Users;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,7 @@ public class ApplicationDbContext(DbContextOptions options, IPublisher publisher
     private readonly IPublisher _publisher = publisher ?? throw new ArgumentNullException(nameof(publisher));
 
     public DbSet<User> Users { get; set; }
+    public DbSet<Realm> Realms { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

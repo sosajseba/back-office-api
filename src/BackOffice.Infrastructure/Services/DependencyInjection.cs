@@ -1,4 +1,5 @@
 using BackOffice.Application.Data;
+using BackOffice.Domain.Realms;
 using BackOffice.Domain.Users;
 using BackOffice.Infrastructure.Persistence;
 using BackOffice.Infrastructure.Persistence.Repositories;
@@ -35,6 +36,7 @@ public static class DependencyInjection
         //services.AddScoped<IApplicationDbContext>(sp => sp.GetRequiredService<ApplicationDbContext>());
         //services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContext>());
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IRealmRepository, RealmRepository>();
         return services;
     }
 }
